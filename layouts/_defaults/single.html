@@ -1,0 +1,12 @@
+{{ define "main" }}
+<article class="content-page single-post">
+  <nav class="back-link" aria-label="Back to posts"><a href="{{ printf "%s/" .Section | relURL }}">← All {{ .Section | humanize }}</a></nav>
+  <header class="page-heading">
+    {{ with .Title }}<h1>{{ . }}</h1>{{ end }}
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 02, 2006" }}</time>
+  </header>
+  <div class="prose">{{ .Content }}</div>
+  {{ with .Params.categories }}<p class="taxonomy-links">Filed under {{ range $i, $category := . }}{{ if $i }}, {{ end }}<a href="{{ printf "categories/%s/" ($category | urlize) | relURL }}">{{ $category }}</a>{{ end }}</p>{{ end }}
+  {{ with .Params.tags }}<p class="taxonomy-links">{{ range $i, $tag := . }}{{ if $i }} · {{ end }}<a href="{{ printf "tags/%s/" ($tag | urlize) | relURL }}">#{{ $tag }}</a>{{ end }}</p>{{ end }}
+</article>
+{{ end }}
