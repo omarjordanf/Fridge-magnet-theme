@@ -1,0 +1,8 @@
+name = "Chicago7 for Micro.blog"
+license = "MIT"
+licenselink = "https://github.com/akopdev/hugo-theme-chicago7/blob/main/LICENSE"
+description = "A rounded, type-led Micro.blog adaptation with interactive lettering and no Sass build dependency."
+homepage = "https://github.com/akopdev/hugo-theme-chicago7"
+tags = ["blog", "retro", "minimal", "microblog"]
+features = ["posts", "pages", "navigation", "RSS", "categories", "tags"]
+min_version = "0.91.0"
