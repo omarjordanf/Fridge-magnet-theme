@@ -1,0 +1,8 @@
+{{ define "main" }}
+<section class="content-page">
+  <header class="page-heading"><p class="eyebrow">Selected work</p><h1>{{ .Title }}</h1></header>
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+  <section class="post-list">{{ range .Paginator.Pages }}<article><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>{{ with .Description }}<p>{{ . }}</p>{{ end }}</article>{{ end }}</section>
+  {{ partial "pagination.html" . }}
+</section>
+{{ end }}
