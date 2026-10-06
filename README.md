@@ -22,7 +22,7 @@ The header includes RSS and every item in your Micro.blog `main` menu. A menu it
 
 Posts and pages open as regular pages with a calm, narrow reading column, generous spacing, and small playful color accents. They retain normal Hugo URLs and layouts. The theme supports `main` navigation, RSS, categories, tags, archives, and pagination.
 
-The design uses a locally installed rounded system font where available and loads Nunito as a fallback. The layout does not require images or icon files.
+The site uses DM Sans for navigation and reading text, with Instrument Serif for editorial headings. Rounded system lettering and Nunito remain reserved for the fridge magnets. The layout does not require image or icon files.
 
 ## Local compatibility
 
