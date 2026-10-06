@@ -1,0 +1,10 @@
+{{ define "main" }}
+<section class="letter-stage" aria-label="Interactive letter magnets">
+  <h1 class="stage-fallback" id="site-heading">Lots of Love</h1>
+  <div class="magnet-world" id="magnet-world">
+    <div class="letter-field" id="letter-field" role="group" aria-labelledby="site-heading"></div>
+  </div>
+  <p class="sr-only" id="letter-help">Focus a letter, then use the arrow keys to move it. Hold Shift to move farther. Letters bump instead of overlapping. Press Escape to reset the magnets.</p>
+</section>
+<script src="{{ printf "%s?v=23" ("js/letter-stage.js" | relURL) }}" defer></script>
+{{ end }}
