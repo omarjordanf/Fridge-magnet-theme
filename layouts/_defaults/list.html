@@ -1,0 +1,12 @@
+{{ define "main" }}
+<section class="content-page">
+  <header class="page-heading"><p class="eyebrow">{{ .Section | humanize }}</p><h1>{{ .Title }}</h1></header>
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+  <section class="post-list">
+    {{ range .Paginator.Pages }}
+    <article><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 02, 2006" }}</time><h2><a href="{{ .RelPermalink }}">{{ if .Title }}{{ .Title }}{{ else }}{{ .Summary | plainify | truncate 100 }}{{ end }}</a></h2></article>
+    {{ end }}
+  </section>
+  {{ partial "pagination.html" . }}
+</section>
+{{ end }}
