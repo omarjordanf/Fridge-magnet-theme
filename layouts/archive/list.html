@@ -1,0 +1,11 @@
+{{ define "main" }}
+<section class="content-page">
+  <header class="page-heading"><p class="eyebrow">Browse by date</p><h1>{{ .Title }}</h1></header>
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+  {{ range ((where .Site.RegularPages "Type" "post").GroupByDate "2006") }}
+    <h2 class="archive-year">{{ .Key }}</h2>
+    {{ range .Pages }}<div class="archive-row"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02" }}</time><a href="{{ .RelPermalink }}">{{ if .Title }}{{ .Title }}{{ else }}{{ .Summary | plainify | truncate 100 }}{{ end }}</a></div>{{ end }}
+  {{ end }}
+  {{ partial "pagination.html" . }}
+</section>
+{{ end }}
