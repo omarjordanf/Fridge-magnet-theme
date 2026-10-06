@@ -1,0 +1,6 @@
+{{ define "main" }}
+<section class="content-page not-found-404">
+  <h1>404</h1> 
+  <p>{{ $.Site.Params.missingContentMessage | default "Page not found..." }}</p>
+</section>
+{{ end }}
