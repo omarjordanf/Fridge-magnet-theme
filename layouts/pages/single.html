@@ -1,12 +1,6 @@
-<section class="pagination">
-  {{ if .Paginator.HasPrev }}
-    <a href="{{ .Paginator.Prev.URL }}" class="button">
-      &#9664; {{ $.Site.Params.NewerPosts | default "Newer" }}
-    </a>
-  {{ end }}
-  {{ if .Paginator.HasNext }}
-    <a href="{{ .Paginator.Next.URL }}" class="button">
-      {{ $.Site.Params.OlderPosts | default "Older" }} &#9658;
-    </a>
-  {{ end }}
-</section>
+{{ define "main" }}
+<article class="content-page">
+  <header class="page-heading"><p class="eyebrow">{{ .Site.Title }}</p><h1>{{ .Title }}</h1></header>
+  <div class="prose">{{ .Content }}</div>
+</article>
+{{ end }}

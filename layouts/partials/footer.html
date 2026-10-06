@@ -1,4 +1,4 @@
 <footer class="site-footer">
-  <p>{{ .Site.Params.role | default .Site.Params.author | default "Personal site" }}</p>
-  <span>© {{ now.Year }} {{ .Site.Params.author | default .Site.Title }}</span>
+  {{ with .Site.Params.role }}<p>{{ . }}</p>{{ end }}
+  <span>© {{ now.Year }} {{ .Site.Title }}</span>
 </footer>

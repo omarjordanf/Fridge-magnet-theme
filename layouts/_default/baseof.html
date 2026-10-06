@@ -4,7 +4,7 @@
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
   {{ partial "head.html" . }}
 </head>
-<body class="{{ if .IsHome }}home{{ else }}inner-page{{ end }}">
+<body class="{{ if .IsHome }}home{{ else }}inner-page{{ end }}{{ if eq (lower .Title) "portfolio" }} page-portfolio{{ end }}">
   {{ partial "header.html" . }}
   <main>{{ block "main" . }}{{ end }}</main>
   {{ partial "footer.html" . }}

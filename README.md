@@ -14,7 +14,7 @@ Micro.blog's documented custom-theme import clones a GitHub repository. If ZIP u
 
 ## Navigation and personalization
 
-The header includes a Writing link, RSS, and every item in your Micro.blog `main` menu. Add pages such as About to that menu so readers can reach them from every page. Where your Micro.blog configuration exposes Hugo parameters, these values personalize the design:
+The header includes RSS and every item in your Micro.blog `main` menu. A menu item named “LifeFeed” opens the chronological post feed on the homepage; the site name takes readers back to the magnet display. Add pages such as About to the menu so readers can reach them from every page. Where your Micro.blog configuration exposes Hugo parameters, these values personalize the design:
 
 - `title`: your name or site name, shown in the top-left header.
 - `params.role`: the quiet caption in the bottom-left corner.

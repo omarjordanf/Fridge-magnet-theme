@@ -4,6 +4,11 @@
   const world = document.querySelector('#magnet-world');
   if (!heading || !field || !world) return;
 
+  document.body.classList.add('home');
+  const syncHomeView = () => document.body.classList.toggle('is-feed', window.location.hash === '#lifefeed');
+  syncHomeView();
+  window.addEventListener('hashchange', syncHomeView);
+
   document.body.classList.add('letters-active');
   const sourceWords = heading.textContent.trim().split(/\s+/u);
   const displayRows = sourceWords.length === 3 ? [`${sourceWords[0]} ${sourceWords[1]}`, sourceWords[2]] : sourceWords;
@@ -32,8 +37,15 @@
   }
 
   function fitField() {
-    const longestWord = Math.max(...words.map((word) => word.length));
-    const width = Math.max(18, Math.min(220, (window.innerWidth - 112) / longestWord, (window.innerHeight - 150) / (words.length * 1.55)));
+    const longestRowUnits = Math.max(...words.map((word) => word.reduce((total, character) => total + (character === ' ' ? 0.28 : 1), 0)));
+    const sideSpace = window.innerWidth <= 600 ? 24 : 112;
+    const width = Math.max(18, Math.min(220, (window.innerWidth - sideSpace) / longestRowUnits, (window.innerHeight - 150) / (words.length * 1.55)));
+    const header = document.querySelector('.site-header');
+    const footer = document.querySelector('.site-footer');
+    const stageTop = Math.max(88, header ? header.getBoundingClientRect().bottom : 88);
+    const stageBottom = Math.max(64, footer ? window.innerHeight - footer.getBoundingClientRect().top : 64);
+    document.documentElement.style.setProperty('--stage-top', `${stageTop}px`);
+    document.documentElement.style.setProperty('--stage-bottom', `${stageBottom}px`);
     field.style.setProperty('--mark-size', `${width}px`);
     bodies.forEach((body) => {
       body.style.setProperty('--rest-x', `${(Number(body.dataset.restX) * width).toFixed(1)}px`);
@@ -114,7 +126,7 @@
       if (!foundOverlap) break;
     }
     // Keep each line of the title comfortably inside the visible canvas after a shove.
-    const safe = 36;
+    const safe = window.innerWidth <= 600 ? 16 : 36;
     const viewport = world.getBoundingClientRect();
     const rows = [...new Set(bodies.map((body) => body.parentElement))];
     rows.forEach((row) => {
@@ -126,6 +138,17 @@
         : right > viewport.right - safe ? viewport.right - safe - right : 0;
       if (shift) rowBodies.forEach((body) => setPosition(body, Number(body.dataset.x) + shift, Number(body.dataset.y)));
     });
+    // Center the complete, settled phrase in the available canvas.
+    const allBounds = bodies.map(shape);
+    const left = Math.min(...allBounds.map((box) => box.left));
+    const right = Math.max(...allBounds.map((box) => box.right));
+    const top = Math.min(...allBounds.map((box) => box.top));
+    const bottom = Math.max(...allBounds.map((box) => box.bottom));
+    const targetX = viewport.left + (viewport.width - (right - left)) / 2 - left;
+    const targetY = viewport.top + (viewport.height - (bottom - top)) / 2 - top;
+    const shiftX = Math.max(viewport.left + safe - left, Math.min(viewport.right - safe - right, targetX));
+    const shiftY = Math.max(viewport.top + safe - top, Math.min(viewport.bottom - safe - bottom, targetY));
+    bodies.forEach((body) => setPosition(body, Number(body.dataset.x) + shiftX, Number(body.dataset.y) + shiftY));
     if (updateHome) bodies.forEach((body) => {
       body.dataset.homeX = body.dataset.x;
       body.dataset.homeY = body.dataset.y;

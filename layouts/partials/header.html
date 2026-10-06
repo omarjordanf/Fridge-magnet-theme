@@ -2,8 +2,10 @@
   <a class="site-name" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
   <nav aria-label="Main navigation">
     <ul>
-      <li><a href="{{ "/post/" | relURL }}">Writing</a></li>
-      {{ with .Site.Menus.main }}{{ range .ByWeight }}<li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>{{ end }}{{ end }}
+      {{ with .Site.Menus.main }}{{ range .ByWeight }}
+        {{ if eq (lower .Name) "lifefeed" }}<li><a href="{{ printf "%s#lifefeed" $.Site.Home.RelPermalink }}">{{ .Name }}</a></li>
+        {{ else }}<li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>{{ end }}
+      {{ end }}{{ end }}
       {{ with .Site.Home.OutputFormats.Get "RSS" }}<li><a href="{{ .RelPermalink }}">RSS</a></li>{{ end }}
     </ul>
   </nav>
