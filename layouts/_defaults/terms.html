@@ -1,0 +1,9 @@
+{{ define "main" }}
+<section class="content-page">
+  <header class="page-heading"><p class="eyebrow">Browse by topic</p><h1>{{ .Title }}</h1></header>
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+  <section class="taxonomy-grid">
+    {{ range .Data.Terms.ByCount }}<span>{{ .Count }}</span><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>{{ end }}
+  </section>
+</section>
+{{ end }}
